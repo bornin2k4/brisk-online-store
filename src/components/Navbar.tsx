@@ -2,6 +2,7 @@
 import { ShoppingCart, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   cartItemCount: number;
@@ -11,13 +12,18 @@ interface NavbarProps {
 }
 
 const Navbar = ({ cartItemCount, onCartClick, currentView, onViewChange }: NavbarProps) => {
+  const navigate = useNavigate();
+
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-8">
-            <div className="text-2xl font-bold text-blue-600">
+            <div 
+              className="text-2xl font-bold text-blue-600 cursor-pointer"
+              onClick={() => navigate("/")}
+            >
               ShopPro
             </div>
             
@@ -48,10 +54,15 @@ const Navbar = ({ cartItemCount, onCartClick, currentView, onViewChange }: Navba
 
           {/* Right side actions */}
           <div className="flex items-center space-x-4">
-            {/* User Menu */}
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-blue-600">
+            {/* Login/Account Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => navigate("/login")}
+              className="text-gray-600 hover:text-blue-600"
+            >
               <User className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">Account</span>
+              <span className="hidden sm:inline">Login</span>
             </Button>
 
             {/* Cart Button */}
